@@ -7,6 +7,9 @@ const validateField = (fieldname, data) => {
   fieldname === 'name' ? validateName(data) : validateEmail(data)
 };
 */
+let flagName = 1;
+let flagEmail = 1;
+
 function addForm() {
   const formData = document.createElement('div');
   const formContent = document.getElementsByClassName('form-container')[0];
@@ -50,38 +53,56 @@ export default function app() {
   //--------------------------------------------
 
   // step 3
-  /*
-  const state = {
-    values: {
-      name: '',
-      email: '',
-    },
-    errors: {
-      name: [],
-      email: [],
-    },
-  };
-
-  const watchedState = onChange(state, (path) => {
-    const selector = path.split('.')[1];
-    const input = document.querySelector(`name=${selector}`);
-    console.log(input);
-    //   if (validateField(selector, state.values[selector]).length === 0) {
-    //   input.classList.remove('is-valid');
-    //   input.classList.add('is-invalid');
-    // } else {
-    //   input.classList.remove('is-invalid');
-    //   input.classList.add('is-valid');
-    // }
-  });
+  const aq = document.getElementsByClassName('btn btn-primary')[0];
+  aq.disabled = true;
 
   form.addEventListener('input', (e) => {
     e.preventDefault();
-    const targetName = e.target.name;
-    const data = new FormData(form).get(targetName);
-    watchedState.values[targetName] = data;
-    watchedState.errors[targetName] = validateField(targetName, data);
+
+    const inputNameData = document.getElementById('inputName');
+    const inputNameValue = inputNameData.value;
+    const a1 = inputNameValue.trim();
+    if (a1.length > 0) {
+      inputNameData.classList.remove('is-invalid');
+      inputNameData.classList.add('is-valid');
+      flagName = 0;
+    } else {
+      inputNameData.classList.remove('is-valid');
+      inputNameData.classList.add('is-invalid');
+      flagName = 1;
+    }
+
+    if ((flagName === 1) || (flagEmail === 1)) {
+      const submit = document.querySelector('[type="submit"]');
+      submit.disabled = true;
+    }
+
+    if ((flagName === 0) && (flagEmail === 0)) {
+      const submit = document.querySelector('[type="submit"]');
+      submit.disabled = false;
+    }
+
+    const inputEmailData = document.getElementById('inputEmail');
+    const inputEmailValue = inputEmailData.value;
+    if (/\w+@\w+/.test(inputEmailValue) === true) {
+      inputEmailData.classList.remove('is-invalid');
+      inputEmailData.classList.add('is-valid');
+      flagEmail = 0;
+    } else {
+      inputEmailData.classList.remove('is-valid');
+      inputEmailData.classList.add('is-invalid');
+      flagEmail = 1;
+    }
+
+    if ((flagName === 1) || (flagEmail === 1)) {
+      const yandex = document.getElementsByClassName('btn btn-primary')[0];
+      yandex.disabled = true;
+    }
+
+    if ((flagName === 0) && (flagEmail === 0)) {
+      const pop = document.getElementsByClassName('btn btn-primary')[0];
+      pop.disabled = false;
+    }
   });
-*/
   // step 3
 }
